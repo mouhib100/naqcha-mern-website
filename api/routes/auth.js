@@ -27,10 +27,10 @@ router.post("/register",async(req,res)=>{
             password :  hashedPass,
         }) 
         const user = await newUser.save() //save the user
-        res.status(200).json(user) //the user is been successfully created
+        return res.status(200).json(user) //the user is been successfully created
 
     } catch (error) {
-        res.status(500).json(error);// something wrong with mongodb or express server
+        return res.status(500).json(error);// something wrong with mongodb or express server
     }
 
 })
@@ -42,20 +42,22 @@ router.post("/login", async(req,res)=>{
 
     try {
         const user = await User.findOne({email : req.body.email}) //find this user by email because email is unique
-        !user && res.status(400).json("Wrong email!") //if there is no user inside our db, wrong credentials 
+         if(!user) return res.status(400).json("Wrong email!") //if there is no user inside our db, wrong credentials 
 
         //if there is a user we should validate our password, if the password entered is the same bcrypted password in the db he can login
         const validated = await bcrypt.compare(req.body.password, user.password)
-        !validated && res.status(400).json("wrong password!")
+        if(!validated)  return res.status(400).json("wrong password!")
 
         //i don't want to send the password to user how we prevent that
         const {password, ...others} = user._doc;
 
         //if everything is okay
-        res.status(200).json(others)
+       return res.status(200).json(others)
+        
     } catch (error) {
-        res.status(500).json(error);
+       return res.status(500).json(error);
     }
+
 })
 
 module.exports = router;

@@ -63,10 +63,12 @@ router.delete("/:id", async (req, res) => {
 router.get("/:id", async (req,res)=>{
     
     try{
-        const user = await User.findById(req.params.id)
-
+        const user = await User.findById(req.params.id);
+        // when we get the data we don't suppose to see the password so we use
+        const {password, ...others} = user._doc
+        return res.status(200).json(others);
     }catch(error){
-        res.status(500).json(error)
+        return res.status(500).json(error)
 
     }
 
