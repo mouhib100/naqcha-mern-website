@@ -12,7 +12,7 @@ for us a response, so all of this process take sometime, there is no way to know
 //3-req : the data that we are going to send to the server
 //4-res : response from the server it can be a user or warning etc..
 
-router.post("/register",async(req,res)=>{
+exports.register = async(req,res)=>{
 
     try {
         //if we put req.body it's gonna take everything inside the request but we want only to take the user schema data
@@ -33,12 +33,12 @@ router.post("/register",async(req,res)=>{
         return res.status(500).json(error);// something wrong with mongodb or express server
     }
 
-})
+}
 
 
 //Login
 
-router.post("/login", async(req,res)=>{
+exports.login = async(req,res)=>{
 
     try {
         const user = await User.findOne({email : req.body.email}) //find this user by email because email is unique
@@ -58,6 +58,5 @@ router.post("/login", async(req,res)=>{
        return res.status(500).json(error);
     }
 
-})
+}
 
-module.exports = router;

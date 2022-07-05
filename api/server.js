@@ -1,8 +1,8 @@
 //always like this
 const express = require ('express');
 const app = express();
-const authRoute = require("./routes/auth")
-const userRoute = require("./routes/users")
+const authRouter = require("./routes/auth.router")
+const userRouter = require("./routes/users.router")
 const postRouter = require('./routes/posts.router');
 
 
@@ -11,8 +11,8 @@ const connect = require('./config/connectDb')
 require ('dotenv').config();
 
 app.use(express.json());
-app.use("/api/auth",authRoute); 
-app.use("/api/users",userRoute); 
+app.use("/api/auth",authRouter); 
+app.use("/api/users",userRouter); 
 app.use('/api/posts',postRouter);
 
 const PORT = process.env.PORT || 5000;

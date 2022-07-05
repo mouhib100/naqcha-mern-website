@@ -1,7 +1,6 @@
 //we can create new posts, delete them, update them
 
 //we will be able to delete update our users
-
 const User = require("../models/User")
 const Post = require("../models/Post")
 
