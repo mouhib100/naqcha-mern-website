@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Form, Figure } from "react-bootstrap";
+import { useDispatch } from 'react-redux';
+import { register } from '../../redux/action';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "./SignUp.css";
 
-
+//41:39 samer
 const SignUp = () => {
+  const dispatch = useDispatch()
+  const [firstname, SetFirstName] = useState('')
+  const [lastname, SetLasName] = useState('')
+  const [email, SetEmail] = useState('')
+  const [password, SetPassword] = useState('')
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+    dispatch(register({firstname,lastname,email,password})) //hedhi el data eli n7eb ndispatcheha(nwaze3ha) maysir el submit ela manenzel 3al button
+
+  }
+
+
   return (
     <div className='signup'>
       <Container>
@@ -16,26 +31,26 @@ const SignUp = () => {
             <Form>
               <Form.Group controlId="formFirstName">
                 <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" placeholder="First Name" />
+                <Form.Control type="text" placeholder="First Name" onChange={(e) => SetFirstName(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="formLastName">
                 <Form.Label>Last Name</Form.Label>
-                <Form.Control type="text" placeholder="Last Name" />
+                <Form.Control type="text" placeholder="Last Name" onChange={(e) => SetLasName(e.target.value)} />
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Control type="email" placeholder="Enter email" onChange={(e) => SetEmail(e.target.value)} />
               </Form.Group>
 
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control type="password" placeholder="Password" onChange={(e) => SetPassword(e.target.value)} />
               </Form.Group>
 
-              <Button variant="primary  btn-block" type="submit">
+              <Button variant="primary  btn-block" onClick={(e)=>submitHandler(e)}>
                 Sign up
               </Button>
-              <br/>
+              <br />
               <p>Already have an account? <a href="#">Sign in</a></p>
             </Form>
           </Col>
