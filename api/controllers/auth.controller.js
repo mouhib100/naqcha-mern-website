@@ -3,6 +3,7 @@ const router = require("express").Router();
 // we are going to specify the model that we are going to use
 const User = require("../models/User")
 const bcrypt = require('bcrypt') // we use be crypt for user protection by crypting his password
+const jwt = require('jsonwebtoken'); //token fo the session
 
 
 //Register
@@ -26,8 +27,10 @@ exports.register = async(req,res)=>{
             email : req.body.email,
             password :  hashedPass,
         }) 
+
         const user = await newUser.save() //save the user
-        return res.status(200).json(user) //the user is been successfully created
+        const token = jwt.sign({id:user._id},process.env.passwordToken);
+        return res.status(200).json({msg:"user registered successfully",user,token}) //the user is been successfully created
 
     } catch (error) {
         return res.status(500).json(error);// something wrong with mongodb or express server
@@ -51,8 +54,9 @@ exports.login = async(req,res)=>{
         //i don't want to send the password to user how we prevent that
         const {password, ...others} = user._doc;
 
+        const token = jwt.sign({id:user._id},process.env.passwordToken);
         //if everything is okay
-       return res.status(200).json(others)
+       return res.status(200).json({token,others})
         
     } catch (error) {
        return res.status(500).json(error);
