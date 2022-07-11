@@ -1,13 +1,30 @@
+
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import MainNavbar from "../../components/MainNavbar/MainNavbar";
 import Themetoggle from "../../components/themetoggle";
+import { updateuser } from '../../redux/actions/UsersAction';
+
 import "./Editprofile.css";
 
 export default function Editprofile() {
+
+    const dispatch = useDispatch()
+    const [firstname, SetFirstName] = useState('')
+    const [lastname, SetLastName] = useState('')
+    const [email, SetEmail] = useState('')
+    const [password, SetPassword] = useState('')
+
+    const updateProfileHandler = (e) => {
+        e.preventDefault()
+        dispatch(updateuser({firstname,lastname,email,password})) //hedhi el data eli n7eb ndispatcheha(nwaze3ha) maysir el submit ela manenzel 3al button
+    
+      }
+
     return (
         <div>
             <header className="fixed-top site__header">
-                <MainNavbar/>
-                <Themetoggle/>
+                <MainNavbar />
             </header>
             <div className="settings">
                 <div className="settingsWrapper">
@@ -32,13 +49,15 @@ export default function Editprofile() {
                                 className="settingsPPInput"
                             />
                         </div>
-                        <label>Username</label>
-                        <input type="text" placeholder="Safak" name="name" />
+                        <label>Firstname</label>
+                        <input type="text" placeholder="Firstname" name="name" onChange={(e) => SetFirstName(e.target.value)} />
+                        <label>Lastname</label>
+                        <input type="text" placeholder="Lastname" name="name" onChange={(e) => SetLastName(e.target.value)} />
                         <label>Email</label>
-                        <input type="email" placeholder="safak@gmail.com" name="email" />
+                        <input type="Email" placeholder="Email" name="email" onChange={(e) => SetEmail(e.target.value)} />
                         <label>Password</label>
-                        <input type="password" placeholder="Password" name="password" />
-                        <button className="settingsSubmitButton" type="submit">
+                        <input type="password" placeholder="Password" name="password" onChange={(e) => SetPassword(e.target.value)} />
+                        <button className="settingsSubmitButton" type="submit" onClick={(e)=>updateProfileHandler(e)}>
                             Update
                         </button>
                     </form>

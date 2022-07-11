@@ -4,8 +4,8 @@ const { body, validationResult } = require('express-validator');
 exports.registerValidation= [
     body('firstname','firstname required').notEmpty().isString(),
     body('lastname','lastname required').notEmpty().isString(),
-    body('password','password required').notEmpty().isLength({min:6}),
     body('email','email required and email format').isEmail().notEmpty().normalizeEmail(),
+    body('password','password required').notEmpty().isLength({min:6}),
 ]
 
 exports.loginValidation= [
@@ -19,7 +19,7 @@ exports.validation = async(req,res,next) =>{
         if (!errors.isEmpty()) {
           return res.status(400).json({ errors: errors.array() });
         }
-        next()
+        next()  
     } catch (error) {
         return res.status(500).send({error:error})
     }

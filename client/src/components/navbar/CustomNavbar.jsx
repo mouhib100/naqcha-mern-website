@@ -2,12 +2,14 @@ import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from "react-router-dom";
+
 import "./CustomNavbar.css";
 
 function CustomNavbar() {
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="warning" variant="dark">
             <Container>
                 <Navbar.Brand href="#home">NaQcha</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -19,10 +21,8 @@ function CustomNavbar() {
                         <Nav.Link href="#contact">Contact</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#signin">Sign in</Nav.Link>
-                        <Nav.Link eventKey={2} href="#signup">
-                           Sign Up
-                        </Nav.Link>
+                        <Nav.Link><Link to={"/signin"}>Sign In</Link></Nav.Link>
+                        <Nav.Link eventKey={2}><Link to={"/signup"}>Sign Up</Link></Nav.Link>   
                     </Nav>
                 </Navbar.Collapse>
             </Container>

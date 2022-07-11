@@ -7,7 +7,7 @@ import Headermain from "../header/index";
 
 
 
-export const LandingPage = () => {
+const LandingPage = (props) => {
     return (
         <div>
             <Headermain />
@@ -19,3 +19,4 @@ export const LandingPage = () => {
     )
 }
 
+export default LandingPage

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 import Themetoggle from "../components/themetoggle";
 import CustomNavbar from "../components/navbar/CustomNavbar";
+import Socialicons from "../components/socialicons";
 
 const Headermain = () => {
   const [isActive, setActive] = useState("false");
@@ -15,9 +16,7 @@ const Headermain = () => {
     <>
       <header className="fixed-top site__header">
         <CustomNavbar />
-        <div className="d-flex align-items-center">
-          <Themetoggle />
-        </div>
+        <Socialicons/>
       </header>
     </>
   );

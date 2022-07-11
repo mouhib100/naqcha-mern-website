@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import { Button, Form, Figure } from "react-bootstrap";
+import React,{ useState } from 'react'
+import { Button, Form} from "react-bootstrap";
 import { useDispatch } from 'react-redux';
-import { register } from '../../redux/action';
+import { register } from '../../redux/actions/AuthAction';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "./SignUp.css";
+import { Link } from "react-router-dom";
 
 //41:39 samer
 const SignUp = () => {
@@ -51,7 +52,7 @@ const SignUp = () => {
                 Sign up
               </Button>
               <br />
-              <p>Already have an account? <a href="#">Sign in</a></p>
+              <p>Already have an account? <Link to={"/signin"}>Sign In</Link></p>
             </Form>
           </Col>
         </Row>

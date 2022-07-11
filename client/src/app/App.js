@@ -1,32 +1,33 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  BrowserRouter as Router,
-  useLocation,
-  withRouter,
-} from "react-router-dom";
-import AppRoutes from "./routes";
-import AnimatedCursor from "react-animated-cursor";
-import { useDispatch } from 'react-redux';
+import { Routes, Route, useNavigate } from "react-router-dom";
+import SignUp from "../pages/signup/SignUp";
+import SignIn from "../pages/signin/SignIn";
+import Themetoggle from "../components/themetoggle/index"
+import Socialicons from "../components/socialicons/index"
 import "./App.css";
+import WriteArticle from "../pages/writeArticle/WriteArticle";
+import Editprofile from "../pages/Settings/Editprofile";
+import LandingPage from "../pages/LandingPage";
 
 
 export default function App() {
 
-  
+  const navigate = useNavigate
+
+
   return (
-    <Router basename={process.env.PUBLIC_URL}>
-      <div className="cursor__dot">
-        <AnimatedCursor
-          innerSize={15}
-          outerSize={15}
-          color="255, 255 ,255"
-          outerAlpha={0.4}
-          innerScale={0.7}
-          outerScale={5}
-        />
-      </div>
-        <AppRoutes />
-    </Router>
+    <div>
+      <Themetoggle/>
+      {/*<Socialicons/>*/}
+      <Routes>
+        <Route path="/" element={<LandingPage/>} />
+        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/signin" element={<SignIn/>} />
+        <Route path="/writearticle" element={<WriteArticle/>} />
+        <Route path="/editprofile" element={<Editprofile/>} />
+      </Routes>
+    </div>
+
   );
 }

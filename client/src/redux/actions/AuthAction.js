@@ -14,3 +14,25 @@ export const register = (myData) => async (dispatch) => {
 
     }
 }
+
+export const login = (myData) => async (dispatch) => {
+    try {
+        const {data} = await axios.post("http://localhost:4000/api/auth/login",myData)
+        dispatch ({
+            type: "login",
+            payload: data
+        })
+        localStorage.setItem('token',data.token) 
+    } catch (error) {
+        console.log(error)
+
+    }
+}
+
+
+
+
+
+
+
+

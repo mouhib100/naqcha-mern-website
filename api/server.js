@@ -1,9 +1,11 @@
 //always like this
 const express = require('express');
 const app = express();
+const init = require('./config/setup');
 const authRouter = require("./routes/auth.router")
 const userRouter = require("./routes/users.router")
 const postRouter = require('./routes/posts.router');
+const roleRouter = require("./routes/roles.router")
 const cors = require('cors')
 
 const multer = require("multer")
@@ -27,7 +29,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage:storage})
 app.post("/api/upload",upload.single("file"),(req,res)=>{//.single because we are gonna upload on file, our key is file in postman
 
-    res.status(200).json("file has been uploaded");
+    res.status(200).json("file has been uploaded");     
 });
 
 
@@ -38,9 +40,12 @@ app.use(cors());
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use('/api/posts', postRouter);
+app.use('/api/roles', roleRouter);
 
 const PORT = process.env.PORT || 5000;
 connect();
+init();
+
 
 
 app.listen(PORT, (error) => {
