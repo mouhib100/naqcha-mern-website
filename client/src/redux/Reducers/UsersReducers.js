@@ -7,6 +7,19 @@ const init = {
 
 const UserReducer = (state=init,action) =>{
     switch (action.type) {
+
+        case 'currentUser':
+        return{
+            ...state,
+            user:action.payload
+        }
+
+        case 'role':
+        return{
+            ...state,
+            user:action.payload
+        }
+
         case 'updateuser':
         return{
             ...state,

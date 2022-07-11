@@ -10,11 +10,11 @@ const SignIn = (props) => {
   const dispatch = useDispatch()
   const [email, SetEmail] = useState('')
   const [password, SetPassword] = useState('')
- 
+
+
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(login({email,password})) 
-  
 
   }
 
@@ -35,7 +35,7 @@ const SignIn = (props) => {
                 <Form.Control type="password" placeholder="Password" onChange={(e) => SetPassword(e.target.value)}/>
               </Form.Group>
 
-              <Button variant="primary btn-block" type="submit" onClick={(e)=>submitHandler(e)}>
+              <Button variant="primary btn-block" onClick={(e)=>submitHandler(e)}>
                 Login
               </Button>
               <br/>
