@@ -8,7 +8,7 @@ export const register = (myData) => async (dispatch) => {
             type: "register",
             payload: data
         })
-        localStorage.setItem('token',data.token) //local storage hiya win bech ta3mel sauvegarde lel session mta3 l'utilisateur 
+        localStorage.setItem('token',data.token) //local storage hiya win bech ta3mel sauvegarde lel session mta3 l'utilisateur
     } catch (error) {
         console.log(error)
 
@@ -22,7 +22,9 @@ export const login = (myData) => async (dispatch) => {
             type: "login",
             payload: data
         })
-        localStorage.setItem('token',data.token) 
+        localStorage.setItem('token',data.token)
+        return data.token
+        
     } catch (error) {
         console.log(error)
 

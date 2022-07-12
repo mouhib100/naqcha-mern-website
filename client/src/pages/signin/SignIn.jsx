@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import "./SignIn.css";
 import { login } from "../../redux/actions/AuthAction";
@@ -8,13 +8,16 @@ import { login } from "../../redux/actions/AuthAction";
 
 const SignIn = (props) => {
   const dispatch = useDispatch()
+  const navigate=useNavigate()
   const [email, SetEmail] = useState('')
   const [password, SetPassword] = useState('')
 
 
-  const submitHandler = (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault()
-    dispatch(login({email,password})) 
+    const data=await dispatch(login({email,password})) 
+    if(data)navigate("/admin");
+
 
   }
 

@@ -1,7 +1,7 @@
 import MainNavbar from "../../components/MainNavbar/MainNavbar";
-import React,{ useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import {addpost} from '../../redux/actions/PostsAction';
+import { addpost } from '../../redux/actions/PostsAction';
 import Figure from 'react-bootstrap/Figure';
 
 import "./WriteArticle.css";
@@ -10,12 +10,15 @@ export default function WriteArticle() {
   const dispatch = useDispatch()
   const [title, SetTitle] = useState('')
   const [description, SetDescription] = useState('')
+  const [file, setFile] = useState(null);
+
 
   const addPostHandler = (e) => {
     e.preventDefault()
-    dispatch(addpost({title,description})) //hedhi el data eli n7eb ndispatcheha(nwaze3ha) maysir el submit ela manenzel 3al button
+    dispatch(addpost({ title, description })) //hedhi el data eli n7eb ndispatcheha(nwaze3ha) maysir el submit ela manenzel 3al button
 
   }
+  
 
 
 
@@ -27,7 +30,7 @@ export default function WriteArticle() {
       <div className="write">
         <Figure>
           <Figure.Image
-          className="writeImg"
+            className="writeImg"
             alt="171x180"
             src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           />
@@ -38,7 +41,7 @@ export default function WriteArticle() {
               <i className="writeIcon fas fa-plus"></i>
             </label>
             <input id="fileInput" type="file" style={{ display: "none" }} />
-            
+
             <input
               className="writeInput"
               placeholder="Title"
@@ -56,11 +59,11 @@ export default function WriteArticle() {
               onChange={(e) => SetDescription(e.target.value)}
             />
           </div>
-          <button className="writeSubmit" type="submit" onClick={(e)=>addPostHandler(e)}>
+          <button className="writeSubmit" type="submit" onClick={(e) => addPostHandler(e)}>
             Publish
           </button>
         </form>
       </div>
     </div>
-  );  
+  );
 }

@@ -47,9 +47,9 @@ export const roleUser = (roleId,navigate) =>async(dispatch) =>{
 }
 
 
-export const updateuser = (myData) => async (dispatch) => {
+export const updateuser = (userId,myData) => async (dispatch) => {
     try {
-        const {data} = await axios.put("http://localhost:4000/api/users/update/:id",myData)
+        const {data} = await axios.put(`http://localhost:4000/api/users/update/${userId}`,myData)
         dispatch ({
             type: "updateuser",
             payload: data

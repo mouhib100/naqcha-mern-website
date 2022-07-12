@@ -1,5 +1,6 @@
+
 const init={
-    PostList:[],
+    Posts:[],
     count:0
 }
 
@@ -9,7 +10,19 @@ const PostReducer = (state=init,action) =>{
         case 'addPost':
         return{
             ...state,
-            PostList: action.payload
+            posts: action.payload
+        }
+
+        case 'getPost':
+        return{
+            ...state,
+            posts: action.payload
+        }
+
+        case 'getAllPosts':
+        return{
+            ...state,
+            posts: action.payload
         }
 
         default: return state
