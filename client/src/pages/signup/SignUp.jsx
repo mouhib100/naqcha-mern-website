@@ -6,19 +6,22 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "./SignUp.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //41:39 samer
 const SignUp = () => {
   const dispatch = useDispatch()
+  const navigate=useNavigate()
+
   const [firstname, SetFirstName] = useState('')
   const [lastname, SetLasName] = useState('')
   const [email, SetEmail] = useState('')
   const [password, SetPassword] = useState('')
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
-    dispatch(register({firstname,lastname,email,password})) //hedhi el data eli n7eb ndispatcheha(nwaze3ha) maysir el submit ela manenzel 3al button
+    const data = await dispatch(register({firstname,lastname,email,password})) //hedhi el data eli n7eb ndispatcheha(nwaze3ha) maysir el submit ela manenzel 3al button
+    if(data)navigate("/signin");
 
   }
 

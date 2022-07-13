@@ -25,11 +25,9 @@ const PostCard = () => {
 
 
     const loadPost = () => {
-        dispatch(getpost("62cb1eec5a0a7def73c2a3f3"));
+        //dispatch(getpost("62cb1eec5a0a7def73c2a3f3"));
         dispatch(getAllPosts());
     };
-
-
 
 
 
@@ -37,7 +35,7 @@ const PostCard = () => {
         <div>
             <Row xs={1} md={3} className="g-4">
                 {posts?.posts?.map((post, idx) => (
-                    <Col>
+                    <Col key ={idx}>
                         <Card>
                             <Card.Img variant="top" src="https://fr.web.img3.acsta.net/r_654_368/newsv7/21/04/29/14/22/0010719.jpg"  />
                             <Card.Body>

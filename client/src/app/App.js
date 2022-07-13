@@ -29,12 +29,11 @@ export default function App() {
 
 
   return (
-    <div>
-      <Themetoggle />
+    <div className="s_c">
       {/*<Socialicons/>*/}
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={<LandingPage/>} />
+        <Route path="/signup" element={<SignUp/>} />
         <Route path="/user" element={<UserProfile />} />
         <Route path="/admin" element={<AdminProfile/>} />
         <Route path="/signin" element={<SignIn />} />

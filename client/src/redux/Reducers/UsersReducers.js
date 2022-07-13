@@ -1,6 +1,6 @@
 //a reducer is a pure function that takes an action and the previous state of the application and returns the new state.
 const init = {
-    user:[],
+    User:[],
     role:{}
 }
 
@@ -41,6 +41,9 @@ const UserReducer = (state=init,action) =>{
         default: return state
     }
 }
+
+
+
 
 export default UserReducer
 

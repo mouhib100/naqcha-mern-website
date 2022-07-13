@@ -1,6 +1,6 @@
 //a reducer is a pure function that takes an action and the previous state of the application and returns the new state.
 const init = {
-    user:[],
+    userauth:[],
     role:{}
 }
 
@@ -10,13 +10,13 @@ const AuthReducer = (state=init,action) =>{
         case 'register':
         return{
             ...state,
-            user:action.payload
+            userauth:action.payload
         }
 
         case 'login':
         return{
             ...state,
-            user:action.payload
+            userauth:action.payload
         }
 
         default: return state

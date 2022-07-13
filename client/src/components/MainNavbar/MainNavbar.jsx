@@ -1,18 +1,32 @@
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from "react-router-dom";
+import Themetoggle from '../themetoggle';
 import "./MainNavbar.css"
 
 function MainNavbar() {
+
+    const navigate = useNavigate()
+
+
+    const logout = async (e) => {
+        e.preventDefault()
+        await localStorage.removeItem('token');
+        navigate("/signin");
+    };
+
+
     return (
         <div className='MainNavbar'>
             <Navbar bg="light" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="#">NaQcha</Navbar.Brand>
+                    <Navbar.Brand href="#"><Link to={"/user"}>NaQcha</Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -20,10 +34,11 @@ function MainNavbar() {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="#action1">Home</Nav.Link>
-                            <Nav.Link href="#writearticle"><Link to={"/writearticle"}>Write</Link></Nav.Link>
+                            <Link to={"/user"}>Home</Link>
+                            <Link to={"/writearticle"}>Write</Link>
                         </Nav>
                         <Navbar.Collapse className="justify-content-end">
+                            <Themetoggle />
                             <Link className="link" to="/editprofile">
                                 <img
                                     className="topImg"
@@ -32,13 +47,13 @@ function MainNavbar() {
                                 />
                             </Link>
                         </Navbar.Collapse>
-                        <NavDropdown  title="Name">
+                        <NavDropdown title="Name">
                             <NavDropdown.Item><Link to={"/editprofile"}>Edit profile</Link></NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action3">Logout</NavDropdown.Item>
+                            <NavDropdown.Item onClick={(e) => logout(e)}>Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Navbar.Collapse>
-                    </Container>
+                </Container>
             </Navbar>
         </div>
     );

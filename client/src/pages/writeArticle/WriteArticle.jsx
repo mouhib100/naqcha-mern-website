@@ -5,8 +5,10 @@ import { addpost } from '../../redux/actions/PostsAction';
 import Figure from 'react-bootstrap/Figure';
 
 import "./WriteArticle.css";
+import { useNavigate } from "react-router";
 
 export default function WriteArticle() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [title, SetTitle] = useState('')
   const [description, SetDescription] = useState('')
@@ -16,7 +18,6 @@ export default function WriteArticle() {
   const addPostHandler = (e) => {
     e.preventDefault()
     dispatch(addpost({ title, description })) //hedhi el data eli n7eb ndispatcheha(nwaze3ha) maysir el submit ela manenzel 3al button
-
   }
   
 

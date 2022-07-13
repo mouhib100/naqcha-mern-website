@@ -15,15 +15,6 @@ import PostCard from '../../components/postCard/PostCard';
 
 const UserProfile = () => {
 
-    
-
-
-   
-    const token = localStorage.getItem('token')
-    console.log('token', token)
-    if (!token) {
-        window.location.href = '/signin'
-    }
 
     return (
         <div>
