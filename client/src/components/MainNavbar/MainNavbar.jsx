@@ -34,8 +34,8 @@ function MainNavbar() {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Link to={"/user"}>Home</Link>
-                            <Link to={"/writearticle"}>Write</Link>
+                            <Nav.Link><Link to={"/user"}>Home</Link></Nav.Link>
+                            <Nav.Link href="#writearticle"><Link to={"/writearticle"}>Write</Link></Nav.Link>
                         </Nav>
                         <Navbar.Collapse className="justify-content-end">
                             <Themetoggle />

@@ -4,18 +4,21 @@ import axios from "axios"
 
 
 
-export const currentUser = () => async (dispatch) => {
-    
-    axios.defaults.headers.common["Autorization"] = localStorage.getItem("token")
-
+export const currentUser = (token, navigate) => async (dispatch) => {
+    const config = {
+        headers: {
+            Authorization: token
+        }
+    }
+    axios.defaults.headers.common["access-token"] = token
     try {
-        const { data } = await axios.get("http://localhost:4000/api/auth/currentUser/");
+        const { data } = await axios.get("http://localhost:4000/api/auth/currentUser/", config);
 
         dispatch({
             type: 'currentUser',
             payload: data.user
         })
-        dispatch(roleUser(data.user.role))
+        dispatch(roleUser(data.user.role, navigate))
     } catch (error) {
         console.log(error)
     }
@@ -49,14 +52,12 @@ export const roleUser = (roleId, navigate) => async (dispatch) => {
 
 export const updateuser = ({userId, myData}) => async (dispatch) => {
 
-
-    axios.defaults.headers.common["Autorization"] = localStorage.getItem("token")
-
+    axios.defaults.headers.common["Autorization"] = localStorage.getItem('token')
 
     try {
-        const { data } = await axios.put('http://localhost:4000/api/users/update/'+ userId, myData)
+        const { data } = await axios.put('http://localhost:4000/api/users/update/'+ userId, myData) 
 
-        
+          
         dispatch({
             type: "updateuser",
             payload: data

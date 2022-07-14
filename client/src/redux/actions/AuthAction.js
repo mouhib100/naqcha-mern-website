@@ -23,6 +23,7 @@ export const login = (myData) => async (dispatch) => {
             payload: data
         })
         localStorage.setItem('token',data.token)
+        localStorage.setItem('user',JSON.stringify(data.user))
         return data.token
         
     } catch (error) {

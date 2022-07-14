@@ -4,39 +4,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import MainNavbar from "../../components/MainNavbar/MainNavbar";
 import Themetoggle from "../../components/themetoggle";
 import { updateuser } from '../../redux/actions/UsersAction';
+import axios from 'axios';
 
 import "./Editprofile.css";
 
 export default function Editprofile() {
 
-    const userSignin = useSelector((state) => state.User)
-    const userInfo = userSignin;
 
-
-    console.log(userInfo)
+    const currentUser = JSON.parse(localStorage.getItem("user"))
 
 
     const dispatch = useDispatch()
-    const [firstname, SetFirstName] = useState('')
-    const [lastname, SetLastName] = useState('')
-    const [email, SetEmail] = useState('')
-    const [password, SetPassword] = useState('')
+    const [firstname, SetFirstName] = useState(currentUser.firstname)
+    const [lastname, SetLastName] = useState(currentUser.lastname)
+    const [email, SetEmail] = useState(currentUser.email)
+    const [password, SetPassword] = useState(currentUser.password)
 
 
-    const updateProfileHandler = (e) => {
-        e.preventDefault()
-        dispatch(updateuser({ userId: userInfo._id, firstname, lastname, email, password }))
+    const updateProfileHandler = async(e) => {
+
+        try {
+            const { data } = await axios.put('http://localhost:4000/api/users/update/' + currentUser._id,{firstname,lastname,email,password})
+            localStorage.setItem('user',JSON.stringify(data.user))
+            console.log(data.user)           
+        } catch (error) {
+            console.log(error.message)
+
+        }
     }
 
-    useEffect(() => {
-        if (userInfo) {
-            console.log(userInfo.name)
-            SetEmail(userInfo.email);
-            SetFirstName(userInfo.firstname);
-            SetLastName(userInfo.lastname);
-            SetPassword(userInfo.password);
-        }
-    }, [])
 
 
 
@@ -69,13 +65,13 @@ export default function Editprofile() {
                             />
                         </div>
                         <label>Firstname</label>
-                        <input type="text" placeholder="Firstname" onChange={(e) => SetFirstName(e.target.value)} />
+                        <input type="text" placeholder="Firstname" value={firstname} onChange={(e) => SetFirstName(e.target.value)} />
                         <label>Lastname</label>
-                        <input type="text" placeholder="Lastname" name="name" onChange={(e) => SetLastName(e.target.value)} />
+                        <input type="text" placeholder="Lastname" name="name" value={lastname} onChange={(e) => SetLastName(e.target.value)} />
                         <label>Email</label>
-                        <input type="Email" placeholder="Email" name="email" onChange={(e) => SetEmail(e.target.value)} />
+                        <input type="Email" placeholder="Email" name="email" value={email} onChange={(e) => SetEmail(e.target.value)} />
                         <label>Password</label>
-                        <input type="password" placeholder="Password" name="password" onChange={(e) => SetPassword(e.target.value)} />
+                        <input type="password" placeholder="Password" name="password" value={password} onChange={(e) => SetPassword(e.target.value)} />
                         <button className="settingsSubmitButton" type="submit" onClick={(e) => updateProfileHandler(e)}>
                             Update
                         </button>
