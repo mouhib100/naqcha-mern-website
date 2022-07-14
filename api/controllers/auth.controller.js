@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
         //if everything is okay
         const token = jwt.sign({id:user._id},process.env.passwordToken);
         
-        return res.status(200).send({msg:'Logged successfully',token})
+        return res.status(200).send({msg:'Logged successfully',token,user})
 
     } catch (error) {
         return res.status(500).json(error);

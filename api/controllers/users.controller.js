@@ -13,19 +13,13 @@ exports.updateuser =  async (req, res) => {
    
     console.log(req.params)
     const {id} = req.params
-    const {password} = req.body
-
+    delete req.body.password
      try {
-        if(password){
-            const passwordHashed = bcrypt.hashSync(password,10);
-           
-            password = passwordHashed
+        
+         await User.findByIdAndUpdate(id,req.body);
+         const user = await User.findById(id)
 
-        }
-         await User.findByIdAndUpdate(id,{$set:{...req.body}});
-         const updatedUser = await User.findById(id)
-         console.log({msg:'user updated successfully',updatedUser})
-         return res.status(200).json({msg:'user updated successfully',updatedUser})
+         return res.status(200).json({msg:'user updated successfully',user})
 
      } catch (error) {
          return res.status(500).send({error:error})
